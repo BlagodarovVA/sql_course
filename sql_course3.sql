@@ -428,6 +428,88 @@ select department_name, first_name
 select last_name, first_name, salary
 from employees where salary > (select avg(salary) from employees);
 
+select (select MIN(min_salary) from jobs) min_zp,
+(select MAX(LENGTH(first_name)) from employees) samoe_dlinnoe_imya
+from dual;
+
+select last_name, first_name from employees 
+where employee_id IN (select manager_id from employees);
+
+select department_name, min(salary), max(salary) from
+(select salary, department_name from employees e JOIN departments d
+on (e.department_id = d.department_id))
+group by department_name;
+
+select department_name, min(salary), max(salary) from
+(select salary, department_name from employees e JOIN departments d
+on (e.department_id = d.department_id))
+group by department_name
+having max(salary) > (select 2*5000 from dual)
+and min(salary) < (select salary from employees where employee_id = 113);
+
+-- 91 SINGLE-ROW SUBQUERY
+select last_name, first_name, salary from employees
+where salary < (select max(salary)/5 from employees);
+
+select last_name, first_name, salary from employees 
+where salary > (select avg(salary) from employees);
+
+select job_title from jobs j join employees e       -- максимальна€ средн€€ зарплата по должност€м
+ON (j.job_id = e.job_id)
+group by job_title
+having avg(salary) = (select max(avg(salary)) from employees group by job_id);
+
+-- 92 MULTIPLE-ROW SUBQUERY
+select last_name, first_name, salary, job_id from employees
+where job_id IN (select job_id from jobs where min_salary > 8000);  -- IN или NOT IN
+
+-- ANY зарплата работника больше любой из подзапроса
+-- ALL зарплата работника больше каждого из подзапроса
+select last_name, first_name, salary, job_id from employees
+where salary > ALL(select salary from employees where department_id = 100);
+
+select last_name, first_name, salary, job_id from employees
+where salary < ANY(select salary from employees where department_id = 100);
+
+select distinct(department_name) from departments d     -- отделы, в которых есть сотрудники
+join employees e on (d.department_id = e.department_id)
+order by department_name;
+
+select department_name from departments    -- аналогично через подзапрос
+where department_id IN (select department_id from employees)
+order by department_name;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
