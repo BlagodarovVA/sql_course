@@ -479,19 +479,29 @@ select department_name from departments    -- аналогично через подзапрос
 where department_id IN (select department_id from employees)
 order by department_name;
 
+-- 93 CORRELATED SUBQUERY - ресурсоёмкий запрос, лучше не использовать
+select last_name, first_name, salary from employees
+where salary > (select avg(salary) from employees);
 
+select e1.last_name, e1.first_name, e1.salary, e1.department_id from employees e1
+where salary > (select avg(e2.salary) from employees e2
+where e2.department_id = e1.department_id)
+order by e1.department_id;
 
+-- 94
+select first_name, last_name, salary from employees where department_id IN  -- поиск сотрудников из конкретной страны
+(select department_id from departments where location_id IN
+(select location_id from locations where country_id IN
+(select country_id from countries where country_name = 'Belarus')));
 
+select first_name, last_name, salary from employees
+where job_id IN (select job_id from jobs where UPPER(job_title)like '%MANAGER%')
+and salary > (select avg(salary) + 5000 from employees);
 
+select first_name, last_name, salary from employees
+where salary > ALL(select salary from employees where first_name = 'David');
 
-
-
-
-
-
-
-
-
+-- 95 DZ
 
 
 
