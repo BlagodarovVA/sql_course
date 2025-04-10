@@ -502,22 +502,54 @@ select first_name, last_name, salary from employees
 where salary > ALL(select salary from employees where first_name = 'David');
 
 -- 95 DZ
+select * from employees
+where LENGTH(first_name) = (select MAX(LENGTH(first_name)) from employees);
 
+select * from employees
+where salary > (select avg(salary) from employees);
 
+select city from locations where location_id IN
+(select department_id from departments where department_id IN
+(select sum(salary) from employees));
 
+select * from employees ;
+select * from locations;
+select * from departments;
 
+select city, sum(salary) from employees e
+    join departments d on (e.department_id = d.department_id)
+    join locations l on (d.location_id = l.location_id)
+    group by city
+    having sum(salary) =
+        (select min(sum(salary))
+            from employees e
+                join departments d on (e.department_id = d.department_id)
+                join locations l on (d.location_id = l.location_id)
+            group by city);
 
+select * from employees where manager_id
+IN (select employee_id from employees where salary > 15000);
 
+select * from departments where department_id
+NOT IN (select distinct(department_id) from employees where department_id is not null);
 
+select * from employees where employee_id
+NOT IN (select distinct(manager_id) from departments where manager_id is not null);
 
+select * from employees e
+where (select count(*) from employees 
+        where manager_id = e.employee_id) > 6;
 
+select * from employees where department_id = 
+(select department_id from departments where department_name= 'IT');
 
+select * from employees where manager_id IN
+    (select employee_id from employees where TO_CHAR(hire_date, 'YYYY') = '2005')
+and hire_date < TO_DATE('01012005', 'DDMMYYYY');
 
-
-
-
-
-
+select * from employees e where manager_id IN
+    (select employee_id from employees where TO_CHAR(hire_date, 'MM') = '01')
+    and 15 < (select LENGTH(job_title) from jobs where job_id = e.job_id);
 
 
 
