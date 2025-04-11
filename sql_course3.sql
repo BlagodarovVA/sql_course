@@ -551,6 +551,66 @@ select * from employees e where manager_id IN
     (select employee_id from employees where TO_CHAR(hire_date, 'MM') = '01')
     and 15 < (select LENGTH(job_title) from jobs where job_id = e.job_id);
 
+-- 96 SET operators
+-- UNION - объединение, повтор€ющиес€ строки исключаютс€, упор€дочивает по алфавиту.
+-- UNION ALL Ч объединение, повтор€ющиес€ строки включаютс€.
+-- INTERSECT - пересечение
+-- MINUS - от 1 множества отнимаем 2
+
+-- 97 UNION ALL
+select * from jobs where job_id like '%MAN%'
+UNION ALL
+select * from jobs where job_id like '%MAN%';
+
+select job_id, max_salary from jobs where job_id like '%MAN%'       -- бессмысленно, но важно совпадение количества
+UNION ALL                                                           -- колонок и их типа
+select job_title, min_salary from jobs where job_id like '%MAN%';
+
+select job_id, min_salary from jobs where job_id like '%MAN%'
+UNION ALL
+select job_id, max_salary from jobs where job_id like '%MAN%'
+order by min_salary DESC;                                  -- сортировка только по пол€м или алиасу из 1 подзапроса
+
+select * from jobs where job_id like '%MAN%'
+UNION ALL
+select * from jobs where job_id like '%MAN%'
+order by 3 DESC;                                           -- если столбцы не указаны
+
+select first_name, last_name, salary from employees
+where employee_id > 200
+UNION ALL
+select job_id, job_title, max_salary from jobs where job_id like '%MAN%';
+
+select country_id from countries
+UNION ALL
+select country_name from countries;
+
+-- 98 UNION
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
