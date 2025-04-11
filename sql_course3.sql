@@ -585,21 +585,43 @@ select country_id from countries
 UNION ALL
 select country_name from countries;
 
--- 98 UNION
+-- 98 UNION - более ресурсоёмкий, чем UNION ALL
+select * from jobs where job_id like '%MAN%'    -- уникальные строки
+UNION
+select * from jobs where job_id like '%MAN%';
 
+select * from jobs where min_salary between 4500 and 8000
+UNION
+select * from jobs where max_salary between 10000 and 15000;
 
+-- 99 INTERSECT - возвращает совпадения без дубликатов
+select * from jobs where min_salary between 4500 and 8000
+INTERSECT
+select * from jobs where max_salary between 10000 and 15000;
 
+select first_name, last_name from employees
+INTERSECT
+select street_address, city from locations;
 
+select job_id, job_title, max_salary from jobs
+    where min_salary between 4500 and 8000
+INTERSECT
+select job_id, job_title, max_salary from jobs 
+    where max_salary between 10000 and 15000
+order by max_salary DESC;
 
+-- 100 MINUS - возвращает то, что есть в 1 запросе, но нет во 2
+-- удаляет дубликаты и сортирует
+select * from jobs where job_id like '%MAN%'
+MINUS
+select * from jobs where job_id like '%MAN%';
 
-
-
-
-
-
-
-
-
+select job_id, job_title, max_salary from jobs
+    where min_salary between 4500 and 8000
+MINUS
+select job_id, job_title, max_salary from jobs 
+    where max_salary between 10000 and 15000
+order by max_salary DESC;
 
 
 
