@@ -680,9 +680,3 @@ order by country DESC;
 
 
 
-
-
-
-
-
-
