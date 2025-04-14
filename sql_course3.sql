@@ -623,13 +623,60 @@ select job_id, job_title, max_salary from jobs
     where max_salary between 10000 and 15000
 order by max_salary DESC;
 
+select first_name, salary from employees where first_name LIKE '%a%'
+INTERSECT
+select first_name, salary from employees where first_name LIKE '%e%'
+MINUS
+select first_name, salary from employees where first_name LIKE '%l%';
 
+select first_name, salary from employees where first_name LIKE '%a%'
+UNION
+select first_name, salary from employees where first_name LIKE '%e%'
+MINUS
+select first_name, salary from employees where first_name LIKE '%l%';
 
+select manager_id from employees where department_id = 20
+INTERSECT
+select manager_id from employees where department_id = 30;
 
+-- если нужно сгруппировать по разным типам данных - добавляем null
+select department_id dept_id, to_char(null) job_id, sum(salary) from employees
+group by department_id
+UNION
+select to_number(null), job_id, sum(salary) from employees
+group by job_id;
 
+-- 102 dz
+select manager_id, to_char(null) jobID, to_number(null) dep_id,  sum(salary) from employees
+group by manager_id
+UNION
+select to_number(null), job_id, to_number(null), sum(salary) from employees
+group by job_id
+UNION
+select to_number(null), to_char(null), department_id, sum(salary) from employees
+group by department_id;
 
+select department_id from employees where manager_id = 100
+MINUS
+select department_id from employees where manager_id IN (145, 201);
 
+select first_name, last_name, salary from employees where first_name LIKE '_a%'
+INTERSECT
+select first_name, last_name, salary from employees where LOWER(last_name) LIKE '%s%'
+order by salary DESC;
 
+select location_id, postal_code, city, country_id from locations
+where country_id IN 
+(select country_id from countries where country_name IN ('Germany', 'Italy')
+UNION ALL
+(select country_id from countries where postal_code LIKE '%9%'));
+
+select country_id id, country_name country, region_id region from countries 
+where length(country_name) > 8
+UNION
+select * from countries where region_id IN
+(select region_id from regions where region_name != 'Europe')
+order by country DESC;
 
 
 
