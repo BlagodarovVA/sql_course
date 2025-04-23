@@ -136,25 +136,25 @@ select INITCAP ('Privet, ' || 'KAK DELa? 888') from dual;
 select * from employees where INITCAP(first_name) = 'David';
 select INITCAP ('PriveT, ' || 'Skolko tebe LET? ' || '34') from dual;
 
--- 32 CONCAT - то же, что и ||
+-- 32 CONCAT - пїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅ ||
 SELECT CONCAT('Privet, ', 'drug') from dual;
-SELECT CONCAT(555, ' это число') from dual; 
-SELECT CONCAT('это дата - ', hire_date) from employees;
+SELECT CONCAT(555, ' пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ') from dual; 
+SELECT CONCAT('пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ - ', hire_date) from employees;
 
 SELECT SYSDATE from dual;
-SELECT CONCAT('Привет ', CONCAT('мой ', 'друг')) from dual;
+SELECT CONCAT('пїЅпїЅпїЅпїЅпїЅпїЅ ', CONCAT('пїЅпїЅпїЅ ', 'пїЅпїЅпїЅпїЅ')) from dual;
 
 --33 LENGTH
 select first_name, LENGTH(first_name) as dlina from employees;
 SELECT LENGTH('Valery Blagodarov') from dual;
 SELECT country_name FROM countries where LENGTH(country_name) < 6;
 
--- 34 LPAD и RPAD
+-- 34 LPAD пїЅ RPAD
 select LPAD('Valery', 8, '#') from dual;
 select RPAD('Valery', 8, '#') from dual;
 select first_name, LPAD(first_name, 15, '$') as newName from employees;
 select first_name, RPAD(first_name, 15, '$') as newName from employees;
-select first_name, RPAD(first_name, 15, 'Опа') as newName from employees;
+select first_name, RPAD(first_name, 15, 'пїЅпїЅпїЅ') as newName from employees;
 select RPAD('Privetstvuyu', 7, '#') from dual;
 
 select RPAD(first_name, 12, ' ') || LPAD(salary, 6, ' ') as newField from employees;
@@ -163,12 +163,12 @@ select RPAD(first_name, 12, ' ') || LPAD(salary, 6, ' ') as newField from employ
 select TRIM(trailing 'q' from 'Valery qqq') from dual;
 select TRIM(leading '*' from '****Valery**') from dual;
 select TRIM(both '*' from '****Valery**') from dual;
--- или так
+-- пїЅпїЅпїЅ пїЅпїЅпїЅ
 select TRIM('*' from '****Valery**') from dual;
 select TRIM(7 from '775627') from dual;
 
--- 36 INSTR - находит искомый элемент (тут ищем, что ищем, начиная с какого 
---            символа, какое совпадение по счету). Обязательные 1 и 2 параметры.
+-- 36 INSTR - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 
+--            пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ). пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 select * from employees where INSTR(job_id, 'PROG')=4;
 select * from employees where INSTR(hire_date, '05')=4;
 select * from employees where INSTR(salary, '2')=2;
@@ -214,7 +214,7 @@ select * from nls_session_parameters WHERE parameter = 'NLS_DATE_FORMAT';
 
 -- 43 SYSDATE
 select sysdate from dual;
-select TO_CHAR(SYSDATE, 'DD-MM-RR hh24:mi:ss') from dual;   -- содержит дату и время
+select TO_CHAR(SYSDATE, 'DD-MM-RR hh24:mi:ss') from dual;   -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 select sysdate-hire_date from employees;
 select sysdate, sysdate + 5, sysdate + 5.5 from dual;
 
@@ -227,16 +227,16 @@ select * from employees where MONTHS_BETWEEN('01.01.10', hire_date) > 60;
 -- 45 ADD_MONTHS
 select * from job_history;
 select end_date, ADD_MONTHS(end_date, 4) from job_history;
--- переход с последнего на последний день следкющего месяца
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 select ADD_MONTHS('30.09.19', 1) from dual;
 select ADD_MONTHS('31.12.24', 2) from dual; 
 
 -- 46 NEXT_DAY
-select NEXT_DAY('17.01.25', 5) from dual;   -- 17-JAN-25 - стандарт даты в американской БД
-select NEXT_DAY(SYSDATE, 3) from dual;      -- следующая среда
-select NEXT_DAY(SYSDATE, 'Понедельник') from dual;
-select NEXT_DAY(SYSDATE, 'Пн') from dual;
-select NEXT_DAY('31.12.25', 'Пн')-7 from dual;  -- последний Пн года
+select NEXT_DAY('17.01.25', 5) from dual;   -- 17-JAN-25 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+select NEXT_DAY(SYSDATE, 3) from dual;      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+select NEXT_DAY(SYSDATE, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ') from dual;
+select NEXT_DAY(SYSDATE, 'пїЅпїЅ') from dual;
+select NEXT_DAY('31.12.25', 'пїЅпїЅ')-7 from dual;  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
 
 -- 47 LAST_DAY
 select LAST_DAY(SYSDATE) from dual;
@@ -307,90 +307,90 @@ select hire_date,
 select LENGTH(123) from dual;
 select SYSDATE, LENGTH(SYSDATE) from dual;
 select ADD_MONTHS('21.01.25', 3) from dual;
-select ADD_MONTHS('21/01*25', 3) from dual;     -- сепаратор может быть любым для русского NLS
--- англ параметры NLS
+select ADD_MONTHS('21/01*25', 3) from dual;     -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ NLS
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ NLS
 select ADD_MONTHS('21-JAN-25', 3) from dual;
-select NEXT_DAY('21-JAN-25', 2) from dual;      -- для англ NLS ПН - это 2 день недели
+select NEXT_DAY('21-JAN-25', 2) from dual;      -- пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ NLS пїЅпїЅ - пїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
--- 52 TO_CHAR для числа
-select TO_CHAR(255, '99') from dual;                -- отображаемый размер
-select TO_CHAR(255, '0999') from dual;              -- отображение нулей впереди
-select TO_CHAR(255.35, '09999.999') from dual;      -- позиция десятичной точки
-select TO_CHAR(255.35, '09999D999') from dual;      -- то же, что и позиция десятичной точки
-select TO_CHAR(1234567, '099,999,999') from dual;   -- запятая отображает порядки
-select TO_CHAR(1234567, '099G99G9G999') from dual;  -- разбиение по группам
-select TO_CHAR(255, '$0999') from dual;             -- добавление $
-select TO_CHAR(255, '0999L') from dual;             -- добавление знака локальной валюты
-select TO_CHAR(-255, '0999MI') from dual;           -- позиция минуса отрицательного числа
-select TO_CHAR(-255, '0999PR') from dual;           -- если число отрицательное, то будет взято в скобки <>
-select TO_CHAR(255, 'S0999') from dual;             -- выводит впереди + или - знака числа
+-- 52 TO_CHAR пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(255, '99') from dual;                -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(255, '0999') from dual;              -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(255.35, '09999.999') from dual;      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(255.35, '09999D999') from dual;      -- пїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(1234567, '099,999,999') from dual;   -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(1234567, '099G99G9G999') from dual;  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(255, '$0999') from dual;             -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ $
+select TO_CHAR(255, '0999L') from dual;             -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(-255, '0999MI') from dual;           -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(-255, '0999PR') from dual;           -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ <>
+select TO_CHAR(255, 'S0999') from dual;             -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ + пїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
 select first_name, salary*1.11111111,
     TO_CHAR(salary*1.11111111, '$999,999.99'),
     TO_CHAR(salary*1.11111111, '$9,999.99')
     from employees;
 
--- 53 TO_CHAR для даты
+-- 53 TO_CHAR пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 select TO_CHAR('23-SEP-83') from dual;
 
-select TO_CHAR(SYSDATE, 'YY') from dual;    -- для 2025: Y - 5, Y - 25 и т.д
-select TO_CHAR(SYSDATE, 'RR') from dual;    -- аналог YY
-select TO_CHAR(SYSDATE, 'Year') from dual;  -- год словами. регистрозависимый шаблон
-select TO_CHAR(SYSDATE, 'MM') from dual;    -- месяц в формате 2 цифр
-select TO_CHAR(SYSDATE, 'Mon') from dual;   -- 3 буквы из названия месяца. регистрозависимый
-select TO_CHAR(SYSDATE, 'Month') from dual; -- буквенное написание месяца. регистрозависимый
+select TO_CHAR(SYSDATE, 'YY') from dual;    -- пїЅпїЅпїЅ 2025: Y - 5, Y - 25 пїЅ пїЅ.пїЅ
+select TO_CHAR(SYSDATE, 'RR') from dual;    -- пїЅпїЅпїЅпїЅпїЅпїЅ YY
+select TO_CHAR(SYSDATE, 'Year') from dual;  -- пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'MM') from dual;    -- пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'Mon') from dual;   -- 3 пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'Month') from dual; -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select hire_date, TO_CHAR(hire_date, 'Month', 'NLS_DATE_LANGUAGE = RUSSIAN') from employees;
-select hire_date, TO_CHAR(hire_date, 'Month')||'_Hello!' from employees;    -- автоматически добавляются пробелы
-select hire_date, TO_CHAR(hire_date, 'fmMonth')||'_Hello!' from employees;  -- fm - пробелы не добавляются
+select hire_date, TO_CHAR(hire_date, 'Month')||'_Hello!' from employees;    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select hire_date, TO_CHAR(hire_date, 'fmMonth')||'_Hello!' from employees;  -- fm - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select last_name, hire_date from employees WHERE TO_CHAR(hire_date, 'fmMonth') = 'August' ;
 
-select TO_CHAR(SYSDATE, 'D') from dual;     -- день недели
-select TO_CHAR(SYSDATE, 'DD') from dual;    -- день месяца
-select TO_CHAR(SYSDATE, 'DDD') from dual;   -- день года
-select TO_CHAR(SYSDATE, 'Dy') from dual;    -- 3 буквы дня недели. регистрозависимый
-select TO_CHAR(SYSDATE, 'Day') from dual;   -- полное название дня недели. регистрозависимый
-select TO_CHAR(SYSDATE, 'W') from dual;     -- неделя месяца
-select TO_CHAR(SYSDATE, 'WW') from dual;    -- неделя года
-select TO_CHAR(SYSDATE, 'Q') from dual;     -- квартал
-select TO_CHAR(SYSDATE, 'CC') from dual;    -- век
+select TO_CHAR(SYSDATE, 'D') from dual;     -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'DD') from dual;    -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'DDD') from dual;   -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'Dy') from dual;    -- 3 пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'Day') from dual;   -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'W') from dual;     -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'WW') from dual;    -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'Q') from dual;     -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'CC') from dual;    -- пїЅпїЅпїЅ
 
-select TO_CHAR(SYSDATE, 'PM') from dual;    -- AM, PM, P.M., A.M - отобразит текущий индикатор
-select TO_CHAR(SYSDATE, 'HH24') from dual;  -- HH, HH:MI, HH12, HH24 - информация о времени в нужном формате
-select TO_CHAR(SYSDATE, 'HH:MI:SS') from dual;    -- время, можно мин и сек по отдельности вывести
-select TO_CHAR(SYSDATE, 'SSSSS') from dual;    -- секунды после полуночи
-select TO_CHAR(SYSDATE, 'fmDAY,Mon,yyyy!') from dual;    -- со знаками пунктуации
-select TO_CHAR(SYSDATE, '"Quarter" Q "of" YYYY "year"') from dual;    -- вставки текста
-select TO_CHAR(SYSDATE, 'DDth "of" mm') from dual;    -- окончание th или st добавится к числу
-select TO_CHAR(SYSDATE, 'yyyysp, mmsp') from dual;    -- sp - напишет текстом
-select TO_CHAR(SYSDATE, 'SSthsp') from dual;    -- комбинация th и sp
-select TO_CHAR(SYSDATE, 'CC') from dual;    -- век
+select TO_CHAR(SYSDATE, 'PM') from dual;    -- AM, PM, P.M., A.M - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'HH24') from dual;  -- HH, HH:MI, HH12, HH24 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'HH:MI:SS') from dual;    -- пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'SSSSS') from dual;    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'fmDAY,Mon,yyyy!') from dual;    -- пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, '"Quarter" Q "of" YYYY "year"') from dual;    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'DDth "of" mm') from dual;    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ th пїЅпїЅпїЅ st пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'yyyysp, mmsp') from dual;    -- sp - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(SYSDATE, 'SSthsp') from dual;    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ th пїЅ sp
+select TO_CHAR(SYSDATE, 'CC') from dual;    -- пїЅпїЅпїЅ
 
 select 'my colleague with ID = ' || employee_id || ' and job_id = ' || job_id || ' joined us on ' || 
 TO_CHAR(hire_date, 'Day "the" ddTH "of" fmMonth YYYY') from employees;
 
 -- 54 TO_DATE
-select TO_DATE('28-jan?25') from dual;  -- можно разные символы использовать
-select TO_CHAR(TO_DATE('28-jan?25'), 'dd-mon-yyyy hh24:mi:ss') from dual;   -- время 00:00 по умолчанию
-select TO_DATE('28-jan-2025 18:30') from dual;  -- можно год целиком писать
-select TO_DATE('18:30 2025-jan-28', 'HH24:MI yyyy-mon-dd') from dual;   -- конвертация в дату по шаблону
-select TO_DATE('18:30 jan-2025', 'HH24:MI mon-yyyy') from dual;     -- если не указано число, по умолчанию берется 01
+select TO_DATE('28-jan?25') from dual;  -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_CHAR(TO_DATE('28-jan?25'), 'dd-mon-yyyy hh24:mi:ss') from dual;   -- пїЅпїЅпїЅпїЅпїЅ 00:00 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_DATE('28-jan-2025 18:30') from dual;  -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_DATE('18:30 2025-jan-28', 'HH24:MI yyyy-mon-dd') from dual;   -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_DATE('18:30 jan-2025', 'HH24:MI mon-yyyy') from dual;     -- пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 01
 select TO_CHAR(TO_DATE('18:30:55 2025-jan-28', 'HH24:MI:ss yyyy-mon-dd'), 
-    'HH24:MI:ss yyyy-mon-dd') from dual;                                    -- вывод в текстовом виде с временем
-select TO_DATE('28-jan-25', 'DD-MON-YYYY') from dual;   -- если год указан в шаблоне, не как в тексте, прокатывает
-select * from employees where hire_date > '01-jan-08';  -- неявная конвертация, лучше не использовать
-select * from employees where hire_date > TO_DATE('01-jan-08', 'DD-MON-RR');  -- явная конвертация
+    'HH24:MI:ss yyyy-mon-dd') from dual;                                    -- пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select TO_DATE('28-jan-25', 'DD-MON-YYYY') from dual;   -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select * from employees where hire_date > '01-jan-08';  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select * from employees where hire_date > TO_DATE('01-jan-08', 'DD-MON-RR');  -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select TO_CHAR(TO_DATE('28-jan-2025', 'DD-MON-RR'), 'Month') from dual;
 select TO_CHAR(TO_DATE('15?1987$17$18$19/09', 'hh24?YYYY$MI$SS$DD/mm'), 'dd-MON-yyyy hh24:mi:ss') from dual;
 
 -- 55 TO_NUMBER
-select TO_NUMBER('455.77') from dual;   -- конвертация в число без маски
-select TO_NUMBER('$455.77', '$99999.999') from dual;    -- с маской
+select TO_NUMBER('455.77') from dual;   -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+select TO_NUMBER('$455.77', '$99999.999') from dual;    -- пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 select TO_NUMBER('4,555.77', '999,999.999') from dual;
-select TO_CHAR(3.17, '99.9') from dual;     -- округляет число, если дробь не влазит в маску
-select TO_NUMBER('3.17', '99.9') from dual; -- будет ошибка, не округляет текст
+select TO_CHAR(3.17, '99.9') from dual;     -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+select TO_NUMBER('3.17', '99.9') from dual; -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
 -- 56
 select LENGTH(UPPER(SYSDATE)) from dual;
@@ -415,24 +415,24 @@ select first_name, NVL(substr(first_name, 6), 'name is too short') from employee
 select last_name, commission_pct, NVL(salary*commission_pct, 500) as bonus from employees;
 
 -- 58 NVL2
-select NVL2(null, 19, 20) from dual;    -- если 1 параметр не null, то возвращаем 2, иначе 3
+select NVL2(null, 19, 20) from dual;    -- пїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ null, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2, пїЅпїЅпїЅпїЅпїЅ 3
 select NVL2('str', 'not null', 'str null') from dual; 
 select last_name, NVL2(commission_pct, commission_pct*100, 0) as "commission_%" from employees;
 select last_name, NVL2(commission_pct, 'yes', 'no') as "commission_have" from employees;
 
 -- 59 NULLIF
-select NULLIF(19, 20) from dual;	-- возвращает null, если парам 1 и 2 равны, и возвращает парам 1, если не равны
+select NULLIF(19, 20) from dual;	-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ null, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 1 пїЅ 2 пїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 1, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 select NULLIF('raz', 'raz') from dual;
-select NULLIF('15', 15) from dual;	-- будет ошибка, нет неявной конвертации
+select NULLIF('15', 15) from dual;	-- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select NULLIF('raz', 'raz') from dual;
-select NULLIF(TO_DATE('18-SEP-87'), TO_DATE('18/SEP/87')) from dual;    -- после преобразования даты равны
+select NULLIF(TO_DATE('18-SEP-87'), TO_DATE('18/SEP/87')) from dual;    -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 select * from countries;
 select country_id, country_name,
     NVL2(NULLIF(country_id, UPPER(SUBSTR(country_name, 1, 2))),
     'Sovpadeniya net', 'Sovpadenie najdeno') as sovpadenie from countries;
 
 -- 60 COALESCE
-select COALESCE(1, null, 2) from dual;  -- возвращает первое значение из списка не null
+select COALESCE(1, null, 2) from dual;  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ null
 select COALESCE(null, null, 'ok', 'not ok') from dual;
 select COALESCE(null, null, null) from dual;
 
@@ -440,15 +440,15 @@ select first_name, commission_pct, manager_id, salary,
    COALESCE(commission_pct, manager_id, salary) as info from employees;
 
 -- 61 DECODE (oracle sql)
-select DECODE(3*4, 12, 'dvenadcat') from dual;  -- если парам.2 = парам.1, то выводим парам.3
-select DECODE(3*4, 13, 'dvenadcat') from dual;  -- получим null
+select DECODE(3*4, 12, 'dvenadcat') from dual;  -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.2 = пїЅпїЅпїЅпїЅпїЅ.1, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.3
+select DECODE(3*4, 13, 'dvenadcat') from dual;  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ null
 select DECODE(3*4, 13, 'dvenadcat', 14, 'chetyrnadcat', 15, 'pyatnadcat', 12, 'dvenadcat') from dual;
 select DECODE(3*4, 13, 'dvenadcat', 
                     14, 'chetyrnadcat', 
                     15, 'pyatnadcat', 
-                    'net sovpadeniy') from dual;  -- последний параметр - else, если ничего не совпало
-select decode(null, 5, 'ok', null, 55) from dual;   -- налы также сравнивает
-select decode(2+2*2, 5, 'five', 12/2, 'six1', 6, 'six2') from dual; -- вернет первое совпадение
+                    'net sovpadeniy') from dual;  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - else, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select decode(null, 5, 'ok', null, 55) from dual;   -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select decode(2+2*2, 5, 'five', 12/2, 'six1', 6, 'six2') from dual; -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select first_name, commission_pct as pct,
     decode(commission_pct, 
@@ -456,20 +456,4 @@ select first_name, commission_pct as pct,
         0.1, 'malo', 
         0.4, 'mnogo', 
         'sredne') as commissionniye from employees where employee_id BETWEEN 140 and 180;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

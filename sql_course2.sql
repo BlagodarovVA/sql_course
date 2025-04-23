@@ -9,9 +9,9 @@ from dual;
 select 
     CASE 3*4
     when 11 then 'eleven'
-    when 12 then 'twelve1'      -- вернется первое совпадение
+    when 12 then 'twelve1'      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     when 24/2 then '24/2'
-    else 'net sovpadenij'       -- вместо вывода null
+    else 'net sovpadenij'       -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ null
     END as case_statement
 from dual;
 
@@ -29,7 +29,7 @@ from employees;
 -- 63 searched CASE
 select 
     CASE
-    when 3*4=13 then 'twelve'   -- условие в каждом when
+    when 3*4=13 then 'twelve'   -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ when
     when 50/5=11 then 'ten'
     when  'ok'='ok' then 'OK'
     else 'net sovpadenij'
@@ -130,27 +130,5 @@ select last_name, salary, commission_pct,
     when salary >= 15000 then 'GOOD'
     END as "case"
 from employees;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

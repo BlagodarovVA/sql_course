@@ -1,53 +1,53 @@
 -- 66 COUNT
-select count(*) from employees;                         -- сколько строк
-select count(commission_pct) from employees;            -- сколько заполненных, null не считает
-select count(NVL(commission_pct, 0)) from employees;    -- чтобы посчитать все значения, null заменяем на 0
+select count(*) from employees;                         -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+select count(commission_pct) from employees;            -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, null пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select count(NVL(commission_pct, 0)) from employees;    -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, null пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 0
 select count(*) from employees where salary > 7000; 
-select count(ALL commission_pct) from employees;        -- ALL испоользуется по умолчанию, не влияет
-select count(DISTINCT commission_pct) from employees;   -- только уникальные
+select count(ALL commission_pct) from employees;        -- ALL пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+select count(DISTINCT commission_pct) from employees;   -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select count(DISTINCT first_name) from employees;
 select count(DISTINCT first_name), count(first_name) from employees;
 select count(*), count(commission_pct), count(DISTINCT commission_pct) from employees;
 select count('abc') from employees;
 
-select count(salary), first_name from employees;    -- будет ошибка
+select count(salary), first_name from employees;    -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 -- 67 SUM
-select SUM(salary) from employees;                   -- сумма значений не считая null
+select SUM(salary) from employees;                   -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ null
 select SUM(commission_pct) from employees;
 select SUM(distinct commission_pct) from employees;
 select 5 + null from dual;                           -- null
 select SUM(salary), 
         sum(distinct salary), 
-        count(salary) from employees;               -- разные групп функции
-select sum(7) from employees;                        -- 7 * кол-во строк
-select ROUND(sum(sysdate - hire_date)/365) from employees;  -- кол-во лет, которое отработали все сотрудники
-select sum(length(first_name))/count(*) from employees;      -- среднее кол-во букв в именах сотрудников
+        count(salary) from employees;               -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select sum(7) from employees;                        -- 7 * пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+select ROUND(sum(sysdate - hire_date)/365) from employees;  -- пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select sum(length(first_name))/count(*) from employees;      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
--- 68 AVG - среднеарифметическое
-select avg(salary) from employees;      -- средняя ЗП
+-- 68 AVG - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+select avg(salary) from employees;      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 select avg(distinct salary) from employees;
 select count(*) a, sum(salary) b, avg(commission_pct) c from employees;
 select avg(7) from employees;
-select avg(sysdate - hire_date)/365 from employees;     -- средний срок работы сотрудников
+select avg(sysdate - hire_date)/365 from employees;     -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select avg(commission_pct) from employees; 
 select avg(NVL(commission_pct, 0)) from employees; 
 
--- MAX и MIN
+-- MAX пїЅ MIN
 select min(salary), max(salary) from employees where department_id = 50;
 select min(hire_date), max(hire_date) from employees;
-select min(last_name), max(last_name) from employees;       -- работает по алфавиту
+select min(last_name), max(last_name) from employees;       -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select count(salary), min(salary), max(salary), sum(salary), avg(salary) from employees;
 select min(length(first_name)), max(length(first_name)) from employees;
 
 -- GROUP BY
-select department_id, count(*), min(salary) from employees  -- count количество строк для каждой группы
+select department_id, count(*), min(salary) from employees  -- count пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     group by department_id 
-    order by 1, 2;                                          -- order by 1,2сортировка по 1 и 2 столбцам
+    order by 1, 2;                                          -- order by 1,2пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 1 пїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select job_id, round(avg(salary)), min(salary) as mymin, max(salary)
     from employees
     group by job_id 
-    order by mymin;                            -- можно сортировать по алиасу, но не группировать
+    order by mymin;                            -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select department_id, max(hire_date), min(first_name), count(*), round(avg(salary)), sum(employee_id)
     from employees group by department_id;
 
@@ -94,7 +94,7 @@ select department_id, count(*), round(avg(salary)) from employees
 -- Nested group
 select department_id, avg(salary) from employees group by department_id;
 select sum(avg(salary)) from employees group by department_id;
-select round(sum(avg(length(upper(last_name))))) from employees group by department_id; -- можно миксовать групповые и сингл функции
+select round(sum(avg(length(upper(last_name))))) from employees group by department_id; -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 -- 75 DZ
 select department_id,
@@ -159,7 +159,7 @@ select round(max(avg(salary)), -3) as maximum_salary
     group by department_id;
 
 -- 76 JOIN
-select e.salary, e.first_name from employees e; -- алиас таблицы для обращения к полному имени поля
+select e.salary, e.first_name from employees e; -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
 -- 77 INNER JOIN (NATURAL JOIN)
 select * from regions;
@@ -172,11 +172,11 @@ select * from employees;
 select * from departments;
 
 select first_name, last_name, salary, department_name, department_id, manager_id
-    from employees natural join departments;    -- объединение по 2 столбцам, т.к. они есть в обеих таблицах
+    from employees natural join departments;    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select * from employees;
 select * from countries;
-select * from employees natural join countries;     -- если нет общих столбцов, то все комбинации перемножатся
+select * from employees natural join countries;     -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select * from employees;
 select * from job_history;
@@ -188,12 +188,12 @@ select c.country_name, c.country_id, r.region_name, region_id
 -- 78 JOIN USING
 select first_name, last_name, salary, department_name,
     e.manager_id emp_manager, d.manager_id dep_manager, department_id
-    from employees e join departments d USING (department_id);      -- объединение по выбранным столбцам
+    from employees e join departments d USING (department_id);      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     
 select * from regions;
 select * from countries;
 select * from regions 
-    join countries using (region_id);     -- аналогично NATURAL JOIN, но лучше, т.к. понятно, по какому столбцу объединение
+    join countries using (region_id);     -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ NATURAL JOIN, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     
 select * from job_history;
 select first_name, last_name, jh.job_id, start_date, end_date
@@ -210,14 +210,14 @@ select * from departments JOIN regions
 
 select first_name, last_name, jh.job_id, start_date, end_date
     from employees emp JOIN job_history jh 
-    ON (emp.employee_id = jh.employee_id and emp.department_id = jh.department_id); -- объединение по 2 столбцам
+    ON (emp.employee_id = jh.employee_id and emp.department_id = jh.department_id); -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select * from departments;
 select * from employees;
 select first_name, department_name from employees JOIN departments dep
     ON (employee_id = dep.manager_id);
 
--- 80 объединение более 2 таблиц
+-- 80 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅпїЅ
 select * from regions;
 select * from locations;
 select * from countries;
@@ -232,7 +232,7 @@ select first_name, last_name, jh.job_id, start_date, end_date, department_name
 
 select first_name, last_name, jh.job_id, start_date, end_date, department_name
     from employees e JOIN job_history jh USING (employee_id)
-    JOIN departments d ON (jh.department_id = d.department_id);     -- джойны можно миксовать, но не желатеьно
+    JOIN departments d ON (jh.department_id = d.department_id);     -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select department_name, min(salary), max(salary)
     from employees e JOIN departments d ON (e.department_id = d.department_id)
@@ -251,7 +251,7 @@ select first_name, salary, min_salary, max_salary
     from employees e JOIN jobs j ON (e.job_id = j.job_id and
     salary between min_salary + 2000 and max_salary - 3000);
 
--- 82 SELF JOIN - джойн внутри одной таблицы
+-- 82 SELF JOIN - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select emp1.employee_id, emp1.last_name, emp1.manager_id, emp2.last_name as manager_name
     from employees emp1 JOIN employees emp2 ON (emp1.manager_id = emp2.employee_id)
     order by emp1.last_name;
@@ -268,8 +268,8 @@ select first_name, last_name, department_name
     from employees e JOIN departments d 
     on (e.department_id = d.department_id);
 
-select first_name, last_name, department_name           -- помимо иннер джойна выводит все строки из левой таблицы
-    from employees e LEFT OUTER JOIN departments d      -- которые не удовлетворяют условие
+select first_name, last_name, department_name           -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    from employees e LEFT OUTER JOIN departments d      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     on (e.department_id = d.department_id)
     order by department_name;
 
@@ -293,8 +293,8 @@ select department_name, d.department_id, e.FIRST_NAME
 
 -- 85 RIGHT OUTER JOIN
 
-select first_name, last_name, department_name           -- помимо иннер джойна выводит все строки из правой таблицы
-    from employees e RIGHT OUTER JOIN departments d      -- которые не удовлетворяют условие
+select first_name, last_name, department_name           -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    from employees e RIGHT OUTER JOIN departments d      -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     on (e.department_id = d.department_id)
     order by department_name;
 
@@ -318,13 +318,13 @@ select NVL(first_name, '-no emloyee-'), NVL(last_name, '-no emloyee-'), NVL(depa
 -- 87 CROSS JOIN
 select * from countries;
 select * from regions;
-select * from countries CROSS JOIN regions;     -- перемножаем все строки таблицы 1 на строки из 2
+select * from countries CROSS JOIN regions;     -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 2
 
 select * from countries CROSS JOIN regions
     where countries.region_id >=3
     order by country_id;
 
--- 88 ORACLE JOIN синтаксис
+-- 88 ORACLE JOIN пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select first_name, last_name, e.department_id, department_name      -- Inner Join
     from employees e, departments d
     where e.department_id = d.department_id;
@@ -394,7 +394,7 @@ select last_name, first_name, salary, job_id from employees
 natural join jobs
 where salary < min_salary + 1000
 order by last_name;
--- ИЛИ
+-- пїЅпїЅпїЅ
 select last_name, first_name, salary, e.job_id from employees e
 join jobs j
 on (e.job_id = j.job_id and salary < min_salary + 1000)
@@ -454,32 +454,32 @@ where salary < (select max(salary)/5 from employees);
 select last_name, first_name, salary from employees 
 where salary > (select avg(salary) from employees);
 
-select job_title from jobs j join employees e       -- максимальная средняя зарплата по должностям
+select job_title from jobs j join employees e       -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 ON (j.job_id = e.job_id)
 group by job_title
 having avg(salary) = (select max(avg(salary)) from employees group by job_id);
 
 -- 92 MULTIPLE-ROW SUBQUERY
 select last_name, first_name, salary, job_id from employees
-where job_id IN (select job_id from jobs where min_salary > 8000);  -- IN или NOT IN
+where job_id IN (select job_id from jobs where min_salary > 8000);  -- IN пїЅпїЅпїЅ NOT IN
 
--- ANY зарплата работника больше любой из подзапроса
--- ALL зарплата работника больше каждого из подзапроса
+-- ANY пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- ALL пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select last_name, first_name, salary, job_id from employees
 where salary > ALL(select salary from employees where department_id = 100);
 
 select last_name, first_name, salary, job_id from employees
 where salary < ANY(select salary from employees where department_id = 100);
 
-select distinct(department_name) from departments d     -- отделы, в которых есть сотрудники
+select distinct(department_name) from departments d     -- пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 join employees e on (d.department_id = e.department_id)
 order by department_name;
 
-select department_name from departments    -- аналогично через подзапрос
+select department_name from departments    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 where department_id IN (select department_id from employees)
 order by department_name;
 
--- 93 CORRELATED SUBQUERY - ресурсоёмкий запрос, лучше не использовать
+-- 93 CORRELATED SUBQUERY - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select last_name, first_name, salary from employees
 where salary > (select avg(salary) from employees);
 
@@ -489,7 +489,7 @@ where e2.department_id = e1.department_id)
 order by e1.department_id;
 
 -- 94
-select first_name, last_name, salary from employees where department_id IN  -- поиск сотрудников из конкретной страны
+select first_name, last_name, salary from employees where department_id IN  -- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 (select department_id from departments where location_id IN
 (select location_id from locations where country_id IN
 (select country_id from countries where country_name = 'Belarus')));
@@ -552,29 +552,29 @@ select * from employees e where manager_id IN
     and 15 < (select LENGTH(job_title) from jobs where job_id = e.job_id);
 
 -- 96 SET operators
--- UNION - объединение, повторяющиеся строки исключаются, упорядочивает по алфавиту.
--- UNION ALL — объединение, повторяющиеся строки включаются.
--- INTERSECT - пересечение
--- MINUS - от 1 множества отнимаем 2
+-- UNION - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+-- UNION ALL пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+-- INTERSECT - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+-- MINUS - пїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2
 
 -- 97 UNION ALL
 select * from jobs where job_id like '%MAN%'
 UNION ALL
 select * from jobs where job_id like '%MAN%';
 
-select job_id, max_salary from jobs where job_id like '%MAN%'       -- бессмысленно, но важно совпадение количества
-UNION ALL                                                           -- колонок и их типа
+select job_id, max_salary from jobs where job_id like '%MAN%'       -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+UNION ALL                                                           -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
 select job_title, min_salary from jobs where job_id like '%MAN%';
 
 select job_id, min_salary from jobs where job_id like '%MAN%'
 UNION ALL
 select job_id, max_salary from jobs where job_id like '%MAN%'
-order by min_salary DESC;                                  -- сортировка только по полям или алиасу из 1 подзапроса
+order by min_salary DESC;                                  -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select * from jobs where job_id like '%MAN%'
 UNION ALL
 select * from jobs where job_id like '%MAN%'
-order by 3 DESC;                                           -- если столбцы не указаны
+order by 3 DESC;                                           -- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 select first_name, last_name, salary from employees
 where employee_id > 200
@@ -585,8 +585,8 @@ select country_id from countries
 UNION ALL
 select country_name from countries;
 
--- 98 UNION - более ресурсоёмкий, чем UNION ALL
-select * from jobs where job_id like '%MAN%'    -- уникальные строки
+-- 98 UNION - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ UNION ALL
+select * from jobs where job_id like '%MAN%'    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 UNION
 select * from jobs where job_id like '%MAN%';
 
@@ -594,7 +594,7 @@ select * from jobs where min_salary between 4500 and 8000
 UNION
 select * from jobs where max_salary between 10000 and 15000;
 
--- 99 INTERSECT - возвращает совпадения без дубликатов
+-- 99 INTERSECT - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select * from jobs where min_salary between 4500 and 8000
 INTERSECT
 select * from jobs where max_salary between 10000 and 15000;
@@ -610,8 +610,8 @@ select job_id, job_title, max_salary from jobs
     where max_salary between 10000 and 15000
 order by max_salary DESC;
 
--- 100 MINUS - возвращает то, что есть в 1 запросе, но нет во 2
--- удаляет дубликаты и сортирует
+-- 100 MINUS - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ 1 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ 2
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 select * from jobs where job_id like '%MAN%'
 MINUS
 select * from jobs where job_id like '%MAN%';
@@ -639,7 +639,7 @@ select manager_id from employees where department_id = 20
 INTERSECT
 select manager_id from employees where department_id = 30;
 
--- если нужно сгруппировать по разным типам данных - добавляем null
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ null
 select department_id dept_id, to_char(null) job_id, sum(salary) from employees
 group by department_id
 UNION
@@ -677,6 +677,3 @@ UNION
 select * from countries where region_id IN
 (select region_id from regions where region_name != 'Europe')
 order by country DESC;
-
-
-
