@@ -677,3 +677,4 @@ UNION
 select * from countries where region_id IN
 (select region_id from regions where region_name != 'Europe')
 order by country DESC;
+
