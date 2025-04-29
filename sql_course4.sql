@@ -54,10 +54,30 @@ INSERT into nw_emps (emp_id, name, start_date)
 
 select * from nw_emps;
 
+create table emps_with_high_salary(
+    name varchar2(20),
+    salary integer
+);
 
+create table emps_with_dept_100(
+    name varchar2(20),
+    salary integer
+);
 
+create table some_emps(
+    name varchar2(20),
+    salary integer
+);
 
-
+INSERT ALL
+when department_id=100 THEN
+INTO emps_with_dept_100 VALUES (first_name, salary)
+when salary>15000 THEN
+INTO emps_with_high_salary (name) VALUES (last_name)
+when 5=5 THEN
+INTO some_emps (name, salary) VALUES (first_name, salary)
+select first_name, last_name, salary, department_id from employees
+where LENGTH(first_name) > 5;
 
 
 
