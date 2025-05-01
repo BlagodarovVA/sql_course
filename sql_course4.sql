@@ -88,10 +88,18 @@ UPDATE employees SET salary = salary * 2.5 where employee_id = 100;
 UPDATE employees SET salary = 27000, job_id = 'IT_PROG' where employee_id = 101;
 UPDATE employees SET salary = 8000 where employee_id > 105 and employee_id < 110;
 
+-- 110 UPDATE SUBQUERY
+UPDATE employees SET salary = 5000 where department_id IN
+(select department_id from DEPARTMENTS where DEPARTMENT_NAME = 'Marketing');
 
+UPDATE employees SET salary = (select MAX(salary) from employees),
+hire_date = (select MIN(start_date) from JOB_HISTORY)
+where employee_id = 180;
 
+UPDATE employees SET salary = (select salary from employees where employee_id = 5)  -- если подзапрос ничего не вернет, то значение принимается null
+where employee_id = 181;
 
-
+-- 111 DELETE
 
 
 
