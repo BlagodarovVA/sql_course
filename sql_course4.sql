@@ -238,3 +238,37 @@ delete from new_emps
        where manager_id = 100
    )
 );
+
+-- 113 MERGE
+delete from new_emps;
+select *
+  from employees;
+select *
+  from new_emps;
+
+insert into new_emps
+   (
+      select employee_id,
+             first_name,
+             hire_date,
+             job_id
+        from employees
+       where employee_id < 110
+   );
+
+merge into new_emps ne
+using employees e on ( ne.emp_id = e.employee_id )
+when matched then update
+set ne.start_date = sysdate delete
+ where ne.job like '%IT%'
+when not matched then
+insert (
+   emp_id,
+   name,
+   start_date,
+   job )
+values
+   ( employee_id,
+     last_name,
+     hire_date,
+     job_id );
