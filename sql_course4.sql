@@ -79,6 +79,17 @@ INTO some_emps (name, salary) VALUES (first_name, salary)
 select first_name, last_name, salary, department_id from employees
 where LENGTH(first_name) > 5;
 
+select * from employees where employee_id = 200;
+
+-- 109 UPDATE
+
+
+
+
+
+
+
+
 
 
 
