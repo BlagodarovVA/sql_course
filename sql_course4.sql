@@ -82,9 +82,11 @@ where LENGTH(first_name) > 5;
 select * from employees where employee_id = 200;
 
 -- 109 UPDATE
-
-
-
+select * from EMPLOYEES;
+UPDATE employees SET salary = 10000 where employee_id = 100;
+UPDATE employees SET salary = salary * 2.5 where employee_id = 100;
+UPDATE employees SET salary = 27000, job_id = 'IT_PROG' where employee_id = 101;
+UPDATE employees SET salary = 8000 where employee_id > 105 and employee_id < 110;
 
 
 
