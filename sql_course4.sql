@@ -272,3 +272,26 @@ values
      last_name,
      hire_date,
      job_id );
+
+-- 116 COMMIT;
+commit;  -- закончит транзакцию и внесет изменения
+
+select *
+  from new_emps;
+delete from new_emps
+ where name = 'Grant';
+commit;
+insert into new_emps values ( 1000,
+                              'Igor',
+                              sysdate,
+                              'IT_Prog' );
+update new_emps
+   set
+   emp_id = 300
+ where emp_id = 100;
+delete from new_emps
+ where emp_id = 102;
+commit;
+
+-- 117 ROLLBACK
+rollback;
