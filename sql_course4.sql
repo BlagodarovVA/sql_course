@@ -322,5 +322,114 @@ UPDATE new_emps
    emp_id = 300
  WHERE emp_id = 100;
 DELETE FROM new_emps
- WHERE emp_id = 102;
+ WHERE emp_id = 101;
 ROLLBACK;
+
+-- 118 SAVEPOINT
+SELECT *
+  FROM new_emps;
+DELETE FROM new_emps;
+
+INSERT INTO new_emps VALUES ( 1000,
+                              'Igor',
+                              sysdate,
+                              'IT_Prog' );
+SAVEPOINT s1;
+
+UPDATE new_emps
+   SET
+   emp_id = 300
+ WHERE emp_id = 100;
+SAVEPOINT s2;
+
+DELETE FROM new_emps
+ WHERE emp_id = 101;
+
+ROLLBACK TO SAVEPOINT s2;
+SELECT *
+  FROM new_emps;
+
+-- 119 AUTOCOMMIT
+   set autocommit on;
+set autocommit off;
+
+-- 120 SELECT FOR UPDATE
+SELECT *
+  FROM new_emps
+FOR UPDATE;  -- строки запроса лочатся для изменения
+
+UPDATE new_emps
+   SET
+   emp_id = 1500
+ WHERE emp_id = 104;
+COMMIT;                -- commit или rollback завершает транзакцию и снимает лок с записей
+
+-- 121 dz
+CREATE TABLE locations2
+   AS
+      (
+         SELECT *
+           FROM locations
+          WHERE 1 = 2
+      );
+
+INSERT INTO locations2 (
+   location_id,
+   street_address,
+   city,
+   country_id
+) VALUES ( 1001,
+           'Makaronnik str',
+           'Big makarona',
+           'IT' );
+
+INSERT INTO locations2 (
+   location_id,
+   street_address,
+   city,
+   country_id
+) VALUES ( 1002,
+           'Pizza str',
+           'Rome',
+           'IT' );
+COMMIT;
+
+SELECT *
+  FROM locations2;
+
+INSERT INTO locations2 VALUES ( (
+   SELECT MAX(location_id) + 1
+     FROM locations2
+),
+                                initcap('shokoladniy kruasan str'),
+                                256887,
+                                upper('paris'),
+                                initcap('zhabka parafiya'),
+                                'FR' );
+INSERT INTO locations2 VALUES ( (
+   SELECT MAX(location_id) + 1
+     FROM locations2
+),
+                                initcap('lyagushka str'),
+                                256887,
+                                upper('marsel'),
+                                initcap('taxi fed.'),
+                                'FR' );
+COMMIT;
+
+INSERT INTO locations2
+   (
+      SELECT *
+        FROM locations
+       WHERE length(locations.state_province) > 9
+   );
+
+COMMIT;
+
+CREATE TABLE locations4europe
+   AS
+      (
+         SELECT *
+           FROM locations
+          WHERE 1 = 2
+      );
