@@ -1,297 +1,326 @@
 -- 104 INSERT
-select *
-  from employees;
-select *
-  from countries;
-select *
-  from regions;
+SELECT *
+  FROM employees;
+SELECT *
+  FROM countries;
+SELECT *
+  FROM regions;
 
-insert into countries values ( 'SW',
+INSERT INTO countries VALUES ( 'SW',
                                'Sweden',
                                1 );
-insert into countries values ( 'GR',
+INSERT INTO countries VALUES ( 'GR',
                                'Greece' );      -- ошибка, не все значения и не указаны столбцы
-insert into countries (
+INSERT INTO countries (
    country_id,
    country_name
-) values ( 'GR',
+) VALUES ( 'GR',
            'Greece' );   -- ошибки не будет
-update countries
-   set
+UPDATE countries
+   SET
    region_id = 1
- where country_name = 'Greece';
+ WHERE country_name = 'Greece';
 
-insert into countries (
+INSERT INTO countries (
    country_id,
    country_name,
    region_id
 )     -- надежнее указывать поля
- values ( 'NR',
+ VALUES ( 'NR',
            'Norway',
            1 );
 
-insert into countries values ( 'ID',
+INSERT INTO countries VALUES ( 'ID',
                                'Indonesia',
-                               null );
+                               NULL );
 
-insert into countries (
+INSERT INTO countries (
    country_id,
    country_name,
    region_id
-) values ( 'LY',
+) VALUES ( 'LY',
            'Lyagushatiya',
            1 );
 
 -- 105 INSERT с функциями
-select *
-  from employees;
+SELECT *
+  FROM employees;
 
-insert into employees (
+INSERT INTO employees (
    employee_id,
    last_name,
    email,
    hire_date,
    job_id
 )    -- так себе практика мнаписания
- values ( 210,
+ VALUES ( 210,
            'Ignatik',
            'IGNAT',
            '18-SEP-2019',
            'SA_REP' );
 
-insert into employees (
+INSERT INTO employees (
    employee_id,
    last_name,
    email,
    hire_date,
    job_id
-) values ( 211,
+) VALUES ( 211,
            initcap('zinkevich'),
            upper('zinkevich'),
-           to_date('18-SEP-2019','DD-MON-YYYY'),
+           TO_DATE('18-SEP-2019','DD-MON-YYYY'),
            upper('sa_rep') );
 
-insert into employees (
+INSERT INTO employees (
    employee_id,
    last_name,
    email,
    hire_date,
    job_id
-) values ( (
-   select max(employee_id) + 1
-     from employees
+) VALUES ( (
+   SELECT MAX(employee_id) + 1
+     FROM employees
 ),
            initcap('volyina'),
            upper('volyina'),
-           to_date('03-AUG-2018','DD-MON-YYYY'),
+           TO_DATE('03-AUG-2018','DD-MON-YYYY'),
            upper('mk_REP') );
 
 -- 106 INSERT + SUBQUERY
-create table new_emps (
-   emp_id     integer,
-   name       varchar2(20),
-   start_date date,
-   job        varchar2(10)
+CREATE TABLE new_emps (
+   emp_id     INTEGER,
+   name       VARCHAR2(20),
+   start_date DATE,
+   job        VARCHAR2(10)
 );
 
-insert into new_emps (
+INSERT INTO new_emps (
    emp_id,
    name,
    start_date
 )
    (
-      select employee_id,
+      SELECT employee_id,
              first_name,
              hire_date
-        from employees
-       where employee_id > 200
+        FROM employees
+       WHERE employee_id > 200
    );
 
-select *
-  from new_emps;
+SELECT *
+  FROM new_emps;
 
-create table emps_with_high_salary (
-   name   varchar2(20),
-   salary integer
+CREATE TABLE emps_with_high_salary (
+   name   VARCHAR2(20),
+   salary INTEGER
 );
 
-create table emps_with_dept_100 (
-   name   varchar2(20),
-   salary integer
+CREATE TABLE emps_with_dept_100 (
+   name   VARCHAR2(20),
+   salary INTEGER
 );
 
-create table some_emps (
-   name   varchar2(20),
-   salary integer
+CREATE TABLE some_emps (
+   name   VARCHAR2(20),
+   salary INTEGER
 );
 
-insert
-   all when department_id = 100 then
-        into emps_with_dept_100
-      values ( first_name,
+INSERT
+   ALL WHEN department_id = 100 THEN
+        INTO emps_with_dept_100
+      VALUES ( first_name,
                salary )
-      when salary > 15000 then
-           into emps_with_high_salary ( name )
-         values ( last_name )
-      when 5 = 5 then
-           into some_emps (
+      WHEN salary > 15000 THEN
+           INTO emps_with_high_salary ( name )
+         VALUES ( last_name )
+      WHEN 5 = 5 THEN
+           INTO some_emps (
             name,
             salary
          )
-         values ( first_name,
+         VALUES ( first_name,
                   salary )
-select first_name,
+SELECT first_name,
        last_name,
        salary,
        department_id
-  from employees
- where length(first_name) > 5;
+  FROM employees
+ WHERE length(first_name) > 5;
 
-select *
-  from employees
- where employee_id = 200;
+SELECT *
+  FROM employees
+ WHERE employee_id = 200;
 
 -- 109 UPDATE
-select *
-  from employees;
-update employees
-   set
+SELECT *
+  FROM employees;
+UPDATE employees
+   SET
    salary = 10000
- where employee_id = 100;
-update employees
-   set
+ WHERE employee_id = 100;
+UPDATE employees
+   SET
    salary = salary * 2.5
- where employee_id = 100;
-update employees
-   set salary = 27000,
+ WHERE employee_id = 100;
+UPDATE employees
+   SET salary = 27000,
        job_id = 'IT_PROG'
- where employee_id = 101;
-update employees
-   set
+ WHERE employee_id = 101;
+UPDATE employees
+   SET
    salary = 8000
- where employee_id > 105
-   and employee_id < 110;
+ WHERE employee_id > 105
+   AND employee_id < 110;
 
 -- 110 UPDATE SUBQUERY
-update employees
-   set
+UPDATE employees
+   SET
    salary = 5000
- where department_id in (
-   select department_id
-     from departments
-    where department_name = 'Marketing'
+ WHERE department_id IN (
+   SELECT department_id
+     FROM departments
+    WHERE department_name = 'Marketing'
 );
 
-update employees
-   set salary = (
-   select max(salary)
-     from employees
+UPDATE employees
+   SET salary = (
+   SELECT MAX(salary)
+     FROM employees
 ),
        hire_date = (
-          select min(start_date)
-            from job_history
+          SELECT MIN(start_date)
+            FROM job_history
        )
- where employee_id = 180;
+ WHERE employee_id = 180;
 
-update employees
-   set
+UPDATE employees
+   SET
    salary = (
-      select salary
-        from employees
-       where employee_id = 5
+      SELECT salary
+        FROM employees
+       WHERE employee_id = 5
    )  -- если подзапрос ничего не вернет, то значение принимается null
- where employee_id = 181;
+ WHERE employee_id = 181;
 
 -- 111 DELETE
-select *
-  from new_emps;
+SELECT *
+  FROM new_emps;
 
-delete from new_emps;    -- удалит все строки
+DELETE FROM new_emps;    -- удалит все строки
 
-insert into new_emps
+INSERT INTO new_emps
    (
-      select employee_id,
+      SELECT employee_id,
              first_name,
              hire_date,
              job_id
-        from employees
+        FROM employees
    );
 
-delete from new_emps
- where emp_id = 210;
+DELETE FROM new_emps
+ WHERE emp_id = 210;
 
-delete from new_emps
- where job like '%CLERK%'
-    or name is null;
+DELETE FROM new_emps
+ WHERE job LIKE '%CLERK%'
+    OR name IS NULL;
 
 -- 112 DELETE SUBQUERY
-select *
-  from new_emps;
+SELECT *
+  FROM new_emps;
 
-delete from new_emps
- where job in (
-   select distinct job_id
-     from employees
-    where department_id in (
-      select department_id
-        from departments
-       where manager_id = 100
+DELETE FROM new_emps
+ WHERE job IN (
+   SELECT DISTINCT job_id
+     FROM employees
+    WHERE department_id IN (
+      SELECT department_id
+        FROM departments
+       WHERE manager_id = 100
    )
 );
 
 -- 113 MERGE
-delete from new_emps;
-select *
-  from employees;
-select *
-  from new_emps;
+DELETE FROM new_emps;
+SELECT *
+  FROM employees;
+SELECT *
+  FROM new_emps;
 
-insert into new_emps
+INSERT INTO new_emps
    (
-      select employee_id,
+      SELECT employee_id,
              first_name,
              hire_date,
              job_id
-        from employees
-       where employee_id < 110
+        FROM employees
+       WHERE employee_id < 110
    );
 
-merge into new_emps ne
-using employees e on ( ne.emp_id = e.employee_id )
-when matched then update
-set ne.start_date = sysdate delete
- where ne.job like '%IT%'
-when not matched then
-insert (
+MERGE INTO new_emps ne
+USING employees e ON ( ne.emp_id = e.employee_id )
+WHEN MATCHED THEN UPDATE
+SET ne.start_date = sysdate DELETE
+ WHERE ne.job LIKE '%IT%'
+WHEN NOT MATCHED THEN
+INSERT (
    emp_id,
    name,
    start_date,
    job )
-values
+VALUES
    ( employee_id,
      last_name,
      hire_date,
      job_id );
 
 -- 116 COMMIT;
-commit;  -- закончит транзакцию и внесет изменения
+COMMIT;  -- закончит транзакцию и внесет изменения
 
-select *
-  from new_emps;
-delete from new_emps
- where name = 'Grant';
-commit;
-insert into new_emps values ( 1000,
+SELECT *
+  FROM new_emps;
+DELETE FROM new_emps
+ WHERE name = 'Grant';
+COMMIT;
+INSERT INTO new_emps VALUES ( 1000,
                               'Igor',
                               sysdate,
                               'IT_Prog' );
-update new_emps
-   set
+UPDATE new_emps
+   SET
    emp_id = 300
- where emp_id = 100;
-delete from new_emps
- where emp_id = 102;
-commit;
+ WHERE emp_id = 100;
+
+DELETE FROM new_emps
+ WHERE emp_id = 102;
+COMMIT;
 
 -- 117 ROLLBACK
-rollback;
+ROLLBACK;
+
+SELECT *
+  FROM new_emps;
+DELETE FROM new_emps;
+
+INSERT INTO new_emps
+   (
+      SELECT employee_id,
+             last_name,
+             hire_date,
+             job_id
+        FROM employees
+   );
+COMMIT;
+
+DELETE FROM new_emps
+ WHERE name = 'Zinkevich';
+INSERT INTO new_emps VALUES ( 1000,
+                              'Igor',
+                              sysdate,
+                              'IT_Prog' );
+UPDATE new_emps
+   SET
+   emp_id = 300
+ WHERE emp_id = 100;
+DELETE FROM new_emps
+ WHERE emp_id = 102;
+ROLLBACK;
