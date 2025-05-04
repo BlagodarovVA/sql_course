@@ -366,12 +366,7 @@ COMMIT;                -- commit или rollback завершает транзакцию и снимает лок
 
 -- 121 dz
 CREATE TABLE locations2
-   AS
-      (
-         SELECT *
-           FROM locations
-          WHERE 1 = 2
-      );
+   AS ( SELECT * FROM locations WHERE 1 = 2 );
 
 INSERT INTO locations2 (
    location_id,
@@ -398,23 +393,21 @@ SELECT *
   FROM locations2;
 
 INSERT INTO locations2 VALUES ( (
-   SELECT MAX(location_id) + 1
-     FROM locations2
+   SELECT MAX(location_id) + 1 FROM locations2
 ),
-                                initcap('shokoladniy kruasan str'),
-                                256887,
-                                upper('paris'),
-                                initcap('zhabka parafiya'),
-                                'FR' );
+   initcap('shokoladniy kruasan str'),
+   256887,
+   upper('paris'),
+   initcap('zhabka parafiya'),
+   'FR' );
 INSERT INTO locations2 VALUES ( (
-   SELECT MAX(location_id) + 1
-     FROM locations2
+   SELECT MAX(location_id) + 1 FROM locations2
 ),
-                                initcap('lyagushka str'),
-                                256887,
-                                upper('marsel'),
-                                initcap('taxi fed.'),
-                                'FR' );
+   initcap('lyagushka str'),
+   256887,
+   upper('marsel'),
+   initcap('taxi fed.'),
+   'FR' );
 COMMIT;
 
 INSERT INTO locations2
@@ -427,9 +420,4 @@ INSERT INTO locations2
 COMMIT;
 
 CREATE TABLE locations4europe
-   AS
-      (
-         SELECT *
-           FROM locations
-          WHERE 1 = 2
-      );
+   AS ( SELECT * FROM locations WHERE 1 = 2 );
