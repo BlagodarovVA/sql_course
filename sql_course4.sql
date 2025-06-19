@@ -366,7 +366,12 @@ COMMIT;                -- commit или rollback завершает транзакцию и снимает лок
 
 -- 121 dz
 CREATE TABLE locations2
-   AS ( SELECT * FROM locations WHERE 1 = 2 );
+   AS
+      (
+         SELECT *
+           FROM locations
+          WHERE 1 = 2
+      );
 
 INSERT INTO locations2 (
    location_id,
@@ -393,21 +398,24 @@ SELECT *
   FROM locations2;
 
 INSERT INTO locations2 VALUES ( (
-   SELECT MAX(location_id) + 1 FROM locations2
+   SELECT MAX(location_id) + 1
+     FROM locations2
 ),
-   initcap('shokoladniy kruasan str'),
-   256887,
-   upper('paris'),
-   initcap('zhabka parafiya'),
-   'FR' );
+                                initcap('shokoladniy kruasan str'),
+                                256887,
+                                upper('paris'),
+                                initcap('zhabka parafiya'),
+                                'FR' );
+
 INSERT INTO locations2 VALUES ( (
-   SELECT MAX(location_id) + 1 FROM locations2
+   SELECT MAX(location_id) + 1
+     FROM locations2
 ),
-   initcap('lyagushka str'),
-   256887,
-   upper('marsel'),
-   initcap('taxi fed.'),
-   'FR' );
+                                initcap('lyagushka str'),
+                                256887,
+                                upper('marsel'),
+                                initcap('taxi fed.'),
+                                'FR' );
 COMMIT;
 
 INSERT INTO locations2
@@ -420,4 +428,81 @@ INSERT INTO locations2
 COMMIT;
 
 CREATE TABLE locations4europe
-   AS ( SELECT * FROM locations WHERE 1 = 2 );
+   AS
+      (
+         SELECT *
+           FROM locations
+          WHERE 1 = 2
+      );
+
+INSERT
+   ALL WHEN 1 = 1 THEN
+        INTO locations2
+      VALUES ( location_id,
+               street_address,
+               postal_code,
+               city,
+               state_province,
+               country_id )
+      WHEN country_id IN (
+         SELECT country_id
+           FROM countries
+          WHERE region_id = 1
+      ) THEN
+           INTO locations4europe (
+            location_id,
+            street_address,
+            city,
+            country_id
+         )
+         VALUES ( location_id,
+                  street_address,
+                  city,
+                  country_id )
+SELECT *
+  FROM locations;
+
+COMMIT;
+
+UPDATE locations2
+   SET
+   postal_code = '220028'
+ WHERE postal_code IS NULL;
+
+SELECT *
+  FROM locations2;
+
+ROLLBACK;
+
+UPDATE locations2
+   SET
+   postal_code = (
+      SELECT postal_code
+        FROM locations
+       WHERE location_id = '2600'
+   )
+ WHERE postal_code IS NULL;
+
+COMMIT;
+
+DELETE FROM locations2
+ WHERE country_id = 'IT';
+
+SAVEPOINT s1;
+
+UPDATE locations2
+   SET
+   street_address = 'Sezam st. 18'
+ WHERE TO_NUMBER(location_id) > 2500;
+
+SELECT *
+  FROM locations2;
+
+SAVEPOINT s2;
+
+DELETE FROM locations2
+ WHERE street_address = 'Sezam st. 18';
+
+ROLLBACK TO SAVEPOINT s1;
+
+COMMIT;
