@@ -365,6 +365,7 @@ UPDATE new_emps
 COMMIT;                -- commit или rollback завершает транзакцию и снимает лок с записей
 
 -- 121 dz
+-- statemenet для создания таблицы locations2, которая будет содержать такие же столбцы, что и locations
 CREATE TABLE locations2
    AS
       (
@@ -373,6 +374,7 @@ CREATE TABLE locations2
           WHERE 1 = 2
       );
 
+-- Добавьте в таблицу locations2 2 строки с информацией о id локации, адресе, городе, id страны
 INSERT INTO locations2 (
    location_id,
    street_address,
@@ -397,6 +399,7 @@ COMMIT;
 SELECT *
   FROM locations2;
 
+-- Добавьте в таблицу locations2 ещё 2 строки, не используя перечисления имён столбцов, в которые заносится информация
 INSERT INTO locations2 VALUES ( (
    SELECT MAX(location_id) + 1
      FROM locations2
@@ -418,6 +421,7 @@ INSERT INTO locations2 VALUES ( (
                                 'FR' );
 COMMIT;
 
+-- Добавьте в таблицу locations2 строки из таблицы locations, в которых длина значения столбца state_province больше 9
 INSERT INTO locations2
    (
       SELECT *
@@ -427,6 +431,8 @@ INSERT INTO locations2
 
 COMMIT;
 
+-- Перепишите и запустите данный statemenet для создания таблицы
+-- locations4europe, которая будет содержать такие же столбцы, что и locations
 CREATE TABLE locations4europe
    AS
       (
@@ -435,6 +441,10 @@ CREATE TABLE locations4europe
           WHERE 1 = 2
       );
 
+-- Одним statement-ом добавьте в таблицу locations2 всю информацию
+-- для всех строк из таблицы locations, а в таблицу locations4europe
+-- добавьте информацию о id локации, адресе, городе, id страны только
+-- для тех строк из таблицы locations, где города находятся в Европе
 INSERT
    ALL WHEN 1 = 1 THEN
         INTO locations2
@@ -464,6 +474,8 @@ SELECT *
 
 COMMIT;
 
+-- В таблице locations2 измените почтовый код на любое значение в тех
+-- строках, где сейчас нет информации о почтовом коде
 UPDATE locations2
    SET
    postal_code = '220028'
@@ -474,6 +486,9 @@ SELECT *
 
 ROLLBACK;
 
+-- .В таблице locations2 измените почтовый код в тех строках, где сейчас
+-- нет информации о почтовом коде. Новое значение должно быть кодом
+-- из таблицы locations для строки с id 2600
 UPDATE locations2
    SET
    postal_code = (
@@ -485,11 +500,14 @@ UPDATE locations2
 
 COMMIT;
 
+-- Удалите строки из таблицы locations2, где id страны «IT»
 DELETE FROM locations2
  WHERE country_id = 'IT';
 
 SAVEPOINT s1;
 
+-- В таблице locations2 измените адрес в тех строках, где id локации
+-- больше 2500. Новое значение должно быть «Sezam st. 18»
 UPDATE locations2
    SET
    street_address = 'Sezam st. 18'
@@ -500,9 +518,58 @@ SELECT *
 
 SAVEPOINT s2;
 
+-- Удалите строки из таблицы locations2, где адрес равен «Sezam st. 18»
 DELETE FROM locations2
  WHERE street_address = 'Sezam st. 18';
 
 ROLLBACK TO SAVEPOINT s1;
 
 COMMIT;
+
+-- 122
+-- объекты пользователя
+SELECT object_type,
+       COUNT(object_type)
+  FROM user_objects
+ GROUP BY object_type
+ ORDER BY object_type;
+
+-- все объекты, доступные пользователю
+SELECT object_type,
+       COUNT(object_type)
+  FROM all_objects
+ GROUP BY object_type
+ ORDER BY object_type;
+
+-- таблицы пользователя
+SELECT table_name
+  FROM user_tables;
+
+-- колонки таблиц
+SELECT column_name,
+       data_type,
+       nullable
+  FROM user_tab_columns
+ WHERE table_name = 'DEPARTMENTS';  -- имя таблицы обязательно большими буквами
+
+-- вывод данных и последней строкой количество строк
+SELECT department_id,
+       department_name,
+       NULL AS total_rows
+  FROM departments
+UNION ALL
+SELECT NULL,
+       'Total',
+       COUNT(*)
+  FROM departments;
+
+-- 124
+-- так делать можно, но не нужно:
+CREATE TABLE "3abc def" (
+   id NUMBER
+);
+
+SELECT *
+  FROM "3abc def";
+
+DROP TABLE "3abc def";
