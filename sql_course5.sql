@@ -85,3 +85,29 @@ SELECT *
   FROM regions2;
 
 -- 128 alter table
+SELECT *
+  FROM students;
+
+ALTER TABLE students ADD (
+   course NUMBER DEFAULT 3
+);
+ALTER TABLE students MODIFY (
+   avg_score NUMBER(5,3)
+);
+ALTER TABLE students MODIFY (
+   start_date default NULL
+);
+
+INSERT INTO students (
+   student_id,
+   name
+) VALUES ( 4,
+           'Ahmed' );
+
+ALTER TABLE students DROP COLUMN scholarship;
+ALTER TABLE departments DROP COLUMN department_id;
+ALTER TABLE students SET UNUSED COLUMN start_date;
+ALTER TABLE students DROP UNUSED COLUMNS;
+ALTER TABLE students RENAME COLUMN student_id TO id;
+ALTER TABLE students READ ONLY;
+DROP TABLE students;
