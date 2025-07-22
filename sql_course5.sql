@@ -111,3 +111,13 @@ ALTER TABLE students DROP UNUSED COLUMNS;
 ALTER TABLE students RENAME COLUMN student_id TO id;
 ALTER TABLE students READ ONLY;
 DROP TABLE students;
+
+-- 129 TRUNCATE TABLE - очистка таблицы
+TRUNCATE TABLE students;
+
+-- 130 DROP TABLE - удаление таблицы
+COMMIT;
+SELECT *
+  FROM students;
+
+DROP TABLE students;
