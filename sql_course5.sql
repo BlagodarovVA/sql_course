@@ -121,3 +121,100 @@ SELECT *
   FROM students;
 
 DROP TABLE students;
+
+-- 131
+CREATE TABLE friends
+   AS
+      (
+         SELECT employee_id AS id,
+                first_name AS name,
+                last_name AS surname
+           FROM employees
+          WHERE commission_pct IS NOT NULL
+      );
+
+SELECT *
+  FROM friends;
+
+ALTER TABLE friends ADD (
+   email VARCHAR2(40)
+);
+
+ALTER TABLE friends MODIFY
+   email DEFAULT 'no email';
+
+INSERT INTO friends (
+   id,
+   name,
+   surname
+) VALUES ( 1,
+           'Vasya',
+           'Fedorov' );
+
+ALTER TABLE friends RENAME COLUMN id TO friends_id;
+
+DROP TABLE friends;
+
+CREATE TABLE friends (
+   id       INTEGER,
+   name     VARCHAR2(30),
+   surname  VARCHAR2(30),
+   email    VARCHAR2(30),
+   salary   NUMBER(6,2) DEFAULT 0,
+   city     VARCHAR2(30),
+   birthday DATE DEFAULT round(sysdate)
+);
+
+INSERT INTO friends (
+   id,
+   name,
+   surname,
+   email,
+   salary,
+   city,
+   birthday
+) VALUES ( 1,
+           'Vasya',
+           'Fedorov',
+           'vf@test.by',
+           2500,
+           'Minsk',
+           '24-JUL-2025' );
+
+INSERT INTO friends (
+   id,
+   name,
+   surname,
+   email,
+   city
+) VALUES ( 2,
+           'Anya',
+           'Petrova',
+           'ap@test.by',
+           'Vladivostok' );
+
+SELECT *
+  FROM friends;
+
+COMMIT;
+
+ALTER TABLE friends DROP COLUMN salary;
+
+ALTER TABLE friends SET UNUSED COLUMN email;
+ALTER TABLE friends SET UNUSED COLUMN birthday;
+
+ALTER TABLE friends DROP UNUSED COLUMNS;
+
+ALTER TABLE friends READ ONLY;
+
+INSERT INTO friends (
+   id,
+   name,
+   surname
+) VALUES ( 2,
+           'Anya',
+           'Petrova' );
+
+ALTER TABLE friends READ WRITE;
+TRUNCATE TABLE friends;
+DROP TABLE friends;
