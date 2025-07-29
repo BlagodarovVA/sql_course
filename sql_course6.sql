@@ -86,3 +86,83 @@ ALTER TABLE faculties MODIFY (
 );
 
 ALTER TABLE students DROP CONSTRAINT abc;
+
+-- 134 NOT NUL
+DROP TABLE students;
+
+CREATE TABLE students (
+   id         NUMBER
+      CONSTRAINT st_id_unique UNIQUE,
+   name       VARCHAR2(15),
+   course     NUMBER
+      CONSTRAINT stud_course_notnull NOT NULL,
+   -- course     NUMBER NOT NULL,
+   faculty_id INTEGER
+);
+
+INSERT INTO students VALUES ( 3,
+                              'Valery',
+                              2,
+                              4 );
+
+SELECT *
+  FROM students;
+
+CREATE TABLE students (
+   id         NUMBER,
+   name       VARCHAR2(15),
+   course     NUMBER,
+   faculty_id INTEGER
+);
+
+ALTER TABLE students MODIFY (
+   course
+      CONSTRAINT st_course_notnull NOT NULL
+);
+ALTER TABLE students MODIFY (
+   course NOT NULL
+);
+
+INSERT INTO students (
+   id,
+   name,
+   faculty_id
+) VALUES ( 5,
+           'Diana',
+           3 );
+
+ALTER TABLE students MODIFY (
+   course null
+);
+
+-- 135 PRIMARY KEY
+DROP TABLE students;
+
+SELECT *
+  FROM students;
+
+CREATE TABLE students (
+   id         NUMBER
+      CONSTRAINT st_id_pk PRIMARY KEY,
+   name       VARCHAR2(15),
+   course     NUMBER,
+   faculty_id INTEGER
+   -- CONSTRAINT st_id_pk PRIMARY KEY (id)
+   -- PRIMARY KEY (id)
+);
+
+INSERT INTO students VALUES ( 3,
+                              'Valery',
+                              NULL,
+                              4 );
+INSERT INTO students VALUES ( 4,
+                              'Diana',
+                              2,
+                              4 );
+
+ALTER TABLE students MODIFY (
+   id
+      CONSTRAINT pk PRIMARY KEY
+);
+ALTER TABLE students ADD CONSTRAINT pk PRIMARY KEY ( id );
+ALTER TABLE students ADD PRIMARY KEY ( id );
