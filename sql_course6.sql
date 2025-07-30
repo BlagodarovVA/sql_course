@@ -166,3 +166,59 @@ ALTER TABLE students MODIFY (
 );
 ALTER TABLE students ADD CONSTRAINT pk PRIMARY KEY ( id );
 ALTER TABLE students ADD PRIMARY KEY ( id );
+
+-- 136 FOREIGN KEY
+DROP TABLE students;
+DROP TABLE faculties;
+
+SELECT *
+  FROM students;
+SELECT *
+  FROM faculties;
+
+CREATE TABLE students (
+   id         NUMBER,
+   name       VARCHAR2(15),
+   course     NUMBER,
+   faculty_id INTEGER
+      --CONSTRAINT st_fac_fk REFERENCES faculties ( id )
+);
+
+CREATE TABLE faculties (
+   id   NUMBER, -- PRIMARY KEY,
+   name VARCHAR2(15)
+);
+
+INSERT INTO students (
+   id,
+   name,
+   course,
+   faculty_id
+) VALUES ( 1,
+           'Diana',
+           2,
+           2 );
+INSERT INTO students (
+   id,
+   name,
+   course,
+   faculty_id
+) VALUES ( 2,
+           'Valery',
+           2,
+           NULL );
+
+INSERT INTO faculties VALUES ( 1,
+                               'CS' );
+INSERT INTO faculties VALUES ( 2,
+                               'Marketing' );
+
+ALTER TABLE students MODIFY (
+   faculty_id CONSTRAINT fk REFERENCES faculties ( id )
+);
+ALTER TABLE students MODIFY (
+   CONSTRAINT fk faculty_id REFERENCES faculties ( id )
+);
+ALTER TABLE students MODIFY ( faculty_id REFERENCES faculties(id));
+ALTER TABLE students ADD CONSTRAINT fk FOREIGN KEY faculty_id REFERENCES faculties(id);
+ALTER TABLE students ADD FOREIGN KEY faculty_id REFERENCES faculties(id);
