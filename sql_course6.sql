@@ -189,24 +189,14 @@ CREATE TABLE faculties (
    name VARCHAR2(15)
 );
 
-INSERT INTO students (
-   id,
-   name,
-   course,
-   faculty_id
-) VALUES ( 1,
-           'Diana',
-           2,
-           2 );
-INSERT INTO students (
-   id,
-   name,
-   course,
-   faculty_id
-) VALUES ( 2,
-           'Valery',
-           2,
-           NULL );
+INSERT INTO students 
+( id, name, course, faculty_id) 
+VALUES 
+( 1, 'Diana', 2, 2);
+INSERT INTO students
+( id, name, course, faculty_id) 
+VALUES 
+( 2, 'Valery', 2, NULL );
 
 INSERT INTO faculties VALUES ( 1,
                                'CS' );
@@ -222,3 +212,62 @@ ALTER TABLE students MODIFY (
 ALTER TABLE students MODIFY ( faculty_id REFERENCES faculties(id));
 ALTER TABLE students ADD CONSTRAINT fk FOREIGN KEY faculty_id REFERENCES faculties(id);
 ALTER TABLE students ADD FOREIGN KEY faculty_id REFERENCES faculties(id);
+
+-- 137
+DROP TABLE students;
+DROP TABLE faculties;
+
+SELECT * FROM students;
+SELECT * FROM faculties;
+
+CREATE TABLE faculties (
+   id   NUMBER PRIMARY KEY,
+   name VARCHAR2(15)
+);
+
+CREATE TABLE students (
+   id         NUMBER,
+   name       VARCHAR2(15),
+   course     NUMBER,
+   faculty_id INTEGER REFERENCES faculties
+);
+
+INSERT INTO faculties VALUES 
+( 1, 'CS' );
+INSERT INTO faculties VALUES 
+( 2, 'Marketing' );
+INSERT INTO faculties VALUES
+( 3, 'FKP' );
+INSERT INTO faculties VALUES 
+( 4, 'KSIS' );
+
+INSERT INTO students (
+   id,
+   name,
+   course,
+   faculty_id
+) VALUES ( 1,
+           'Diana',
+           3,
+           1 );
+INSERT INTO students (
+   id,
+   name,
+   course,
+   faculty_id
+) VALUES ( 3,
+           'Valery',
+           2,
+           2 );
+           
+
+delete from faculties where id = 1;
+
+CREATE TABLE students (
+   id         NUMBER,
+   name       VARCHAR2(15),
+   course     NUMBER,
+   --faculty_id INTEGER REFERENCES faculties ON DELETE CASCADE
+   faculty_id INTEGER REFERENCES faculties ON DELETE SET NULL
+);
+
