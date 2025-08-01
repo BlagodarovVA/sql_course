@@ -18,28 +18,13 @@ CREATE TABLE faculties (
 SELECT *
   FROM students;
 
-INSERT INTO students VALUES ( 1,
-                              'Vasya',
-                              3,
-                              1,
-                              8.7,
-                              TO_DATE('1-SEP-10'),
-                              1520 );
-INSERT INTO students VALUES ( 2,
-                              'Frosya',
-                              2,
-                              3,
-                              7.5,
-                              TO_DATE('1-SEP-15'),
-                              2025 );
+INSERT INTO students VALUES 
+( 1, 'Vasya', 3, 1, 8.7, TO_DATE('1-SEP-10'), 1520 );
+INSERT INTO students VALUES 
+( 2, 'Frosya', 2, 3, 7.5, TO_DATE('1-SEP-15'), 2025 );
 
-INSERT INTO students VALUES ( NULL,
-                              'Hamyakevich',
-                              1,
-                              2,
-                              9.1,
-                              TO_DATE('1-NOV-24'),
-                              900 );
+INSERT INTO students VALUES 
+( NULL, 'Hamyakevich', 1, 2, 9.1, TO_DATE('1-NOV-24'), 900 );
 
 DROP TABLE students;
 DROP TABLE faculties;
@@ -100,10 +85,8 @@ CREATE TABLE students (
    faculty_id INTEGER
 );
 
-INSERT INTO students VALUES ( 3,
-                              'Valery',
-                              2,
-                              4 );
+INSERT INTO students VALUES 
+( 3, 'Valery', 2, 4 );
 
 SELECT *
   FROM students;
@@ -171,17 +154,15 @@ ALTER TABLE students ADD PRIMARY KEY ( id );
 DROP TABLE students;
 DROP TABLE faculties;
 
-SELECT *
-  FROM students;
-SELECT *
-  FROM faculties;
+SELECT * FROM students;
+SELECT * FROM faculties;
 
 CREATE TABLE students (
    id         NUMBER,
    name       VARCHAR2(15),
    course     NUMBER,
    faculty_id INTEGER
-      --CONSTRAINT st_fac_fk REFERENCES faculties ( id )
+    --CONSTRAINT st_fac_fk REFERENCES faculties ( id )
 );
 
 CREATE TABLE faculties (
@@ -198,10 +179,8 @@ INSERT INTO students
 VALUES 
 ( 2, 'Valery', 2, NULL );
 
-INSERT INTO faculties VALUES ( 1,
-                               'CS' );
-INSERT INTO faculties VALUES ( 2,
-                               'Marketing' );
+INSERT INTO faculties VALUES ( 1, 'CS' );
+INSERT INTO faculties VALUES ( 2, 'Marketing' );
 
 ALTER TABLE students MODIFY (
    faculty_id CONSTRAINT fk REFERENCES faculties ( id )
@@ -242,23 +221,11 @@ INSERT INTO faculties VALUES
 ( 4, 'KSIS' );
 
 INSERT INTO students (
-   id,
-   name,
-   course,
-   faculty_id
-) VALUES ( 1,
-           'Diana',
-           3,
-           1 );
+   id, name, course, faculty_id
+) VALUES ( 1, 'Diana', 3, 1 );
 INSERT INTO students (
-   id,
-   name,
-   course,
-   faculty_id
-) VALUES ( 3,
-           'Valery',
-           2,
-           2 );
+   id, name, course, faculty_id
+) VALUES (3, 'Valery', 2, 2);
            
 
 delete from faculties where id = 1;
@@ -270,4 +237,50 @@ CREATE TABLE students (
    --faculty_id INTEGER REFERENCES faculties ON DELETE CASCADE
    faculty_id INTEGER REFERENCES faculties ON DELETE SET NULL
 );
+
+-- 138 CHECK
+DROP TABLE students;
+SELECT * FROM students;
+
+CREATE TABLE students (
+   id         NUMBER,
+   name       VARCHAR2(15),
+   course     NUMBER, -- constraint ch CHECK (course > 0 AND course < 6),
+   email      VARCHAR2(15) CHECK (INSTR(email, '@')>0) unique,
+   faculty_id INTEGER
+   -- CHECK (course > id)
+   -- constraint ch CHECK (course > 0 AND course < 6)
+);
+
+INSERT INTO students (
+   id, name, course, faculty_id
+) VALUES (2, 'Homyak', 5, 2);
+
+update students set course = 10 where id = 1;
+
+alter table students modify (id constraint ch CHECK (id>=1));
+alter table students add constraint ch2 CHECK (course < 10);
+
+INSERT INTO students VALUES ( 1, 'Diana', 3, 'diana@tut.com', 1 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
