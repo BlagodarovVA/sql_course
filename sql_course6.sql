@@ -136,7 +136,7 @@ CREATE TABLE students (
 
 INSERT INTO students VALUES ( 3,
                               'Valery',
-                              NULL,
+                              1,
                               4 );
 INSERT INTO students VALUES ( 4,
                               'Diana',
@@ -261,23 +261,44 @@ update students set course = 10 where id = 1;
 alter table students modify (id constraint ch CHECK (id>=1));
 alter table students add constraint ch2 CHECK (course < 10);
 
-INSERT INTO students VALUES ( 1, 'Diana', 3, 'diana@tut.com', 1 );
+INSERT INTO students VALUES ( 1, 'Diana', 3, 'diana@doc.com', 1 );
+INSERT INTO students VALUES ( 3, 'Valery', 4, 'valery@it.com', 2 );
 
+-- 141
+select rowid from employees where first_name = 'John';
+select * from employees where  rowid = 'AAAR6sAAEAAAKrGAAn';
+select * from employees;
 
+create index in1 on students(id);
+create unique index in2 on students(name);
 
+SELECT * FROM students;
+delete from students where id = '2';
 
+CREATE TABLE students (
+   id         NUMBER,
+   name       VARCHAR2(15),
+   course     NUMBER,
+   email      VARCHAR2(15),
+   faculty_id INTEGER
+);
 
+CREATE TABLE faculties (
+   id   NUMBER,
+   name VARCHAR2(15)
+);
 
+create unique index st_in1 on students(id);
+create unique index f_in1 on faculties(id);
+create unique index st_in2 on students(course);
+create index st_in3 on students(name);
 
+alter table students add constraint st_pk primary key (id);
+alter table faculties add constraint f_pk primary key (id);
+alter table students add constraint st_un  unique (course);
+alter table students add constraint st_fk foreign key (faculty_id) references faculties(id);
 
-
-
-
-
-
-
-
-
+drop index st_in3;
 
 
 
