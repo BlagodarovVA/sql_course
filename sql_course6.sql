@@ -305,7 +305,6 @@ create bitmap index b_ind1 on students(faculty_id);
 select * from v$version;
 
 -- 143 DZ
-
 CREATE TABLE address (
    id         NUMBER CONSTRAINT ad_id_un UNIQUE,
    country    VARCHAR2(15),
@@ -333,8 +332,5 @@ ALTER TABLE friends modify (email constraint fr_email_nn not null);
 
 drop table friends;
 drop table address;
-
-
-
 
 
