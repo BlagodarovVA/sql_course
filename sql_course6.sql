@@ -300,6 +300,39 @@ alter table students add constraint st_fk foreign key (faculty_id) references fa
 
 drop index st_in3;
 
+-- 142 BITMAP
+create bitmap index b_ind1 on students(faculty_id);
+select * from v$version;
+
+-- 143 DZ
+
+CREATE TABLE address (
+   id         NUMBER CONSTRAINT ad_id_un UNIQUE,
+   country    VARCHAR2(15),
+   city       VARCHAR2(15)
+);
+
+CREATE TABLE friends (
+   id          NUMBER,
+   name        VARCHAR2(15),
+   email       VARCHAR2(15),
+   address_id  NUMBER CONSTRAINT fr_adr_fk REFERENCES address(id) on delete set null,
+   birthday    DATE,
+   CHECK (length(name) > 3)
+);
+
+drop table friends;
+
+create unique index fr_in1 on friends(id);
+
+alter table friends add constraint fr_id_pk primary key (id);
+
+create index fr_email_in on friends(email);
+
+ALTER TABLE friends modify (email constraint fr_email_nn not null);
+
+drop table friends;
+drop table address;
 
 
 
