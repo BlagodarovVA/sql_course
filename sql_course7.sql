@@ -98,6 +98,38 @@ create VIEW v205 (uniq_id, st_name, st_course) AS select * from students;
 select * from v205;
 
 -- 147 ALTER è DROP
+create FORCE VIEW v18 AS select name, last_name from students;
+select * from v18;
+
+alter table students add (last_name varchar2(15));
+alter view v18 compile;
+
+drop view v18;
+
+create VIEW v206 AS select * from v205;
+select * from v206;
+
+-- 148 SYNONYM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
