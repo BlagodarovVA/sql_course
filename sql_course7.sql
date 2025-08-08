@@ -111,19 +111,22 @@ select * from v206;
 
 -- 148 SYNONYM
 
+select * from hr.employees@xepdb1; -- полный путь можно заменить синонимом
 
+create SYNONYM syn1 for students;
+drop synonym syn1;
 
+select * from syn1;
 
+delete from syn1 where id = 5;
 
+create PUBLIC SYNONYM syn1 for employees;
 
+select * from syn1;
 
+drop PUBLIC SYNONYM syn1;
 
-
-
-
-
-
-
+alter SYNONYM syn1 compile;
 
 
 
