@@ -126,17 +126,61 @@ select * from syn1;
 
 drop PUBLIC SYNONYM syn1;
 
-alter SYNONYM syn1 compile;
+ALTER SYNONYM syn1 compile;
 
+-- 150 SEQUENCE
 
+create sequence s1;
 
+select s1.nextval from dual;    -- выдает следующее значение. уникально для всех сессий
+select s1.currval from dual;    -- текущее значение, относится только к текущей сессии
 
+drop table students;
+drop table faculties;
 
+create table students (
+    id number,
+    name varchar2(25),
+    coutrse number,
+    faculty_id integer
+);
 
+create table faculties (
+    id number,
+    name varchar2(25)
+);
 
+create sequence seq_st;
+create sequence seq_faculty start with 20 increment by 5;
 
+insert into faculties values(seq_faculty.nextval, 'IT' );
 
+insert into students values(seq_st.nextval, 'Valery', 4, seq_faculty.currval);
 
+insert into faculties values(seq_faculty.nextval, 'FKP' );
+insert into faculties values(seq_faculty.nextval, 'FITU' );
+
+insert into students values(seq_st.nextval, 'Diana', 3, 25);
+
+select * from faculties;
+select * from students;
+
+create sequence s4 increment by 2 maxvalue 17 cycle cache 3;
+select s4.nextval from dual;
+
+create sequence s5 start with 7 increment by 4 maxvalue 17 cycle cache 2;
+select s5.nextval from dual;
+
+create table students (
+    id number,
+    name varchar2(25)
+);
+
+create sequence s10;
+insert into students values (s10.nextval, 'Valery');
+insert into students values (s10.nextval, 'Diana');
+
+-- 151
 
 
 
