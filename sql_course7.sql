@@ -120,11 +120,12 @@ select * from syn1;
 
 delete from syn1 where id = 5;
 
+
 create PUBLIC SYNONYM syn1 for employees;
 
-select * from syn1;
+SELECT * FROM syn1;
 
-drop PUBLIC SYNONYM syn1;
+DROP PUBLIC SYNONYM syn1;
 
 ALTER SYNONYM syn1 compile;
 
@@ -219,7 +220,6 @@ CREATE TABLE emp1000
            FROM employees
     );
 
-
 select * from departments;
 SELECT * FROM emp1000;
 
@@ -283,3 +283,49 @@ SELECT first_name, last_name, salary
     and salary > &sal;          -- 2 подстановка
 
 -- 154 double ampersand substitution (&&)
+SELECT first_name, last_name, salary
+    FROM employees
+    WHERE first_name like '%&bukva%'
+    AND last_name like '%&bukva%';
+
+SELECT first_name,
+       last_name,
+       salary
+    FROM employees
+    WHERE first_name LIKE '%&&bukva2%'  -- 2 амперсант спросит 1 раз значение
+    AND last_name LIKE '%&bukva2%';
+
+SELECT first_name,
+       last_name,
+       &vars1        -- оракл спросит название поля
+  FROM employees
+  order by &vars2;
+
+SELECT first_name,
+       last_name,
+       &vars        -- оракл спросит название поля
+  FROM employees
+ ORDER BY &vars;
+
+select &prodoljenie2;   -- при запросе дописать селект
+
+SELECT &select_list     -- first_name, last_name, salary
+    from &table_name    -- employees
+    where &conditions   -- salary > 10000
+    order by &col;      -- salary
+
+select * from students;
+
+update students set &col2 = &value2 where &condition2;
+
+-- 155 DEFINE и UNDEFINE
+
+
+
+
+
+
+
+
+
+
