@@ -260,3 +260,26 @@ INSERT INTO employees (
 SELECT * FROM employees;
 
 commit;
+
+-- 153 ampersand substitution (&)
+select first_name, last_name, salary
+    from employees
+    where employee_id = 130;
+
+-- оракл спросит значение для ID - ampersand substitution
+SELECT first_name, last_name, salary
+    FROM employees
+    WHERE employee_id = &ID;
+
+SELECT first_name,
+       last_name,
+       salary
+    FROM employees
+    WHERE first_name = '&name'; -- для типа текст, чтобы не вводить кавычки позже
+
+SELECT first_name, last_name, salary
+    FROM employees
+    WHERE first_name = '&namee'
+    and salary > &sal;          -- 2 подстановка
+
+-- 154 double ampersand substitution (&&)
