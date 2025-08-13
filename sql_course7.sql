@@ -181,16 +181,82 @@ insert into students values (s10.nextval, 'Valery');
 insert into students values (s10.nextval, 'Diana');
 
 -- 151
+create table seq (
+    n number
+);
+
+insert into seq values(1);
+
+DROP TABLE students;
+
+CREATE TABLE students (
+   id         NUMBER primary key,
+   name       VARCHAR2(25)
+);
+
+insert into students values(
+    (select n from seq),
+    'Valery'
+);
+update seq set n = n + 1;
+commit;
+
+SELECT * FROM students;
+SELECT * FROM seq;
+
+alter sequence s10 increment by 5;
+
+drop sequence s3;
+DROP SEQUENCE s10;
+
+-- 152 DZ
+
+CREATE TABLE emp1000
+   AS ( SELECT first_name,
+                last_name,
+                salary,
+                department_id
+           FROM employees
+    );
 
 
+select * from departments;
+SELECT * FROM emp1000;
 
+CREATE FORCE VIEW v1000 AS 
+    SELECT first_name, last_name, salary, department_name, e.city FROM emp1000 e 
+    JOIN departments d ON ( e.department_id = d.department_id );
 
+alter table emp1000 add city varchar2(25);
 
+alter view v1000 compile;
 
+create SYNONYM syn1000 for v1000;
 
+drop view v1000;
 
+DROP SYNONYM syn1000;
 
+drop table emp1000;
 
+CREATE SEQUENCE seq1000 START WITH 12 INCREMENT BY 4 MAXVALUE 200 cycle;
 
+alter SEQUENCE seq1000 nomaxvalue nocycle;
 
+INSERT INTO employees (
+   employee_id,
+   last_name,
+   email,
+   hire_date,
+   job_id
+)
+ VALUES ( seq1000.nextval,
+           'Peven',
+           'PEVEN',
+           '11-AUG-2025',
+           'AD_VP'
+);
 
+SELECT * FROM employees;
+
+commit;
