@@ -320,6 +320,69 @@ update students set &col2 = &value2 where &condition2;
 
 -- 155 DEFINE и UNDEFINE
 
+UNDEFINE bukva;   -- удалит значение переменной из памяти
+DEFINE;         -- вывод значений переменных
+DEFINE bukva = s;
+set define off;     -- отключение &
+set define on;
+
+-- 156 VERIFY
+
+-- 157 DZ
+CREATE TABLE test200 (
+    id integer,
+    name1 varchar2(25),
+    name2 varchar2(25),
+    address1 varchar2(25),
+    address2 varchar2(25)
+);
+
+INSERT INTO test200 (
+   id,
+   name1,
+   name2,
+   address1,
+   address2
+)
+ VALUES ( seq1000.nextval,
+           'Pavel',
+           'Devops',
+           'Minsk city',
+           'Independency str'
+);
+
+select * from test200;
+
+update test200 set &co11 = &value1 where &condition1;
+
+INSERT INTO test200 (
+   id,
+   name1,
+   name2,
+   address1,
+   address2
+)
+ VALUES ( seq1000.nextval,
+           'Valery',
+           'Valery',
+           'World',
+           'World'
+);
+
+select * from test200 where name1 = name2 and address1 = address2;
+
+select * from test200 where name1 = '&&name1'
+                        and name2 = '&name1'
+                        and address1 = '&&adress1'
+                        and address2 = '&adress1';
+
+undefine name1;
+undefine adress1;
+define;
+
+
+
+
 
 
 
